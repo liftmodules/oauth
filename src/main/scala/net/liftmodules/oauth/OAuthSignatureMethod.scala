@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-package net.liftweb
+package net.liftmodules
 package oauth
 
 import java.net.URI
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 
+import net.liftweb._
 import common._
 import util.Helpers
 import net.liftweb.http._

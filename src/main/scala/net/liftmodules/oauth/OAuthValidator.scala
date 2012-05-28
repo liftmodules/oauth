@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package net.liftweb
+package net.liftmodules
 package oauth
 
+import net.liftweb._
 import common._
 import util._
 import Helpers._

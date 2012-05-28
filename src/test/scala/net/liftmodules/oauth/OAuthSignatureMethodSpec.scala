@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-package net.liftweb
+package net.liftmodules
 package oauth
 
 import java.util.Date
 
 import org.specs.Specification
 
+import net.liftweb._
 import common.{Full,Empty}
 import http.GetRequest
 

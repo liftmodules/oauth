@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package net.liftweb {
+package net.liftmodules {
 package oauth {
 
 final class OAuthProblem(val problem: (String, Int),val params: List[(String, String)]) {
