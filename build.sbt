@@ -1,5 +1,7 @@
 name := "oauth"
 
+organization := "net.liftmodules"
+
 liftVersion <<= liftVersion ?? "2.5-SNAPSHOT"
 
 version <<= liftVersion apply { _ + "-1.1-SNAPSHOT" }
