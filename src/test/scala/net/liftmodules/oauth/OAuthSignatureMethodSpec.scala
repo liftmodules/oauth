@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 WorldWide Conferencing, LLC
+ * Copyright 2010-2013 WorldWide Conferencing, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,13 +19,12 @@ package oauth
 
 import java.util.Date
 
-import org.specs.Specification
-
 import net.liftweb._
 import http.GetRequest
 
 import OAuthUtil.Parameter
-import common.{ParamFailure, Full, Empty}
+import common.{Failure, ParamFailure, Full, Empty}
+import org.specs2.mutable._
 
 
 class OAuthSignatureMethodSpec extends Specification {
@@ -71,10 +70,10 @@ class OAuthSignatureMethodSpec extends Specification {
         ))
 
         val box = validator.checkSingleParameters(Full(oauthMessage))
-        box.isEmpty must be (true)
+        box.isEmpty must beTrue
         box match {
           case ParamFailure(OAuthUtil.Problems.PARAMETER_REJECTED._1, Empty, Empty, _) =>
-          case _ => fail("Result box is not failure")
+          case _ => failure("Result box is not failure")
         }
       }
 
@@ -85,7 +84,7 @@ class OAuthSignatureMethodSpec extends Specification {
         ))
 
         val box = validator.checkSingleParameters(Full(oauthMessage))
-        box.isEmpty must be (false)
+        box must not be Empty
         box must_== Full(oauthMessage)
       }
     }
@@ -96,7 +95,7 @@ class OAuthSignatureMethodSpec extends Specification {
           Parameter("oauth_version","1.0")
         ))
         val box = validator.validateVersion(Full(oauthMessage))
-        box.isEmpty must be (false)
+        box must not be Empty
         box must_== Full(oauthMessage)
       }
 
@@ -105,7 +104,7 @@ class OAuthSignatureMethodSpec extends Specification {
           Parameter("oauth_version","6.92")
         ))
         val box = validator.validateVersion(Full(oauthMessage))
-        box.isEmpty must be (true)
+        box.isEmpty must beTrue
       }
     }
   }
