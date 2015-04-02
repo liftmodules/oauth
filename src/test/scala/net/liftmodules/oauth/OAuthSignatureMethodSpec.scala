@@ -30,7 +30,7 @@ import org.specs2.mutable._
 class OAuthSignatureMethodSpec extends Specification {
   val oauthAccessor = OAuthAccessor(FakeConsumer("dpf43f3p2l4k3l03","kd94hf93k423kf44"), Full("pfkkdhi9sl3r4s00"), Empty)
   val hmacSha1 = HMAC_SHA1(oauthAccessor)
-  
+
   "OAuthSignatureMethod" should {
     "normalizeUrl correctly" in {
       hmacSha1.normalizeUrl("htTp://a.com:80/b?foo=bar") must_== ("http://a.com/b")
@@ -40,7 +40,7 @@ class OAuthSignatureMethodSpec extends Specification {
       hmacSha1.normalizeUrl("htTp://a.com?foo=bar") must_== ("http://a.com/")
     }
   }
-  
+
   "HMAC_SHA1" should {
     "Create expected signature from example at http://hueniverse.com/2008/10/beginners-guide-to-oauth-part-iv-signing-requests/" in {
       val oauthMessage = new OAuthMessage(GetRequest, "http://photos.example.net/photos", List(
@@ -72,7 +72,7 @@ class OAuthSignatureMethodSpec extends Specification {
         val box = validator.checkSingleParameters(Full(oauthMessage))
         box.isEmpty must beTrue
         box match {
-          case ParamFailure(OAuthUtil.Problems.PARAMETER_REJECTED._1, Empty, Empty, _) =>
+          case ParamFailure(OAuthUtil.Problems.PARAMETER_REJECTED._1, Empty, Empty, _) => success("ok")
           case _ => failure("Result box is not failure")
         }
       }
@@ -109,7 +109,7 @@ class OAuthSignatureMethodSpec extends Specification {
     }
   }
 
-  
+
   case class FakeConsumer(consumerKey:String, consumerSecret:String) extends OAuthConsumer {
 
     def reset{}
